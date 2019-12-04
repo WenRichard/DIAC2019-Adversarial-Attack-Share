@@ -31,15 +31,15 @@
 
 ## 2. 数据格式
   
-**train_set.xml**
+### train_set.xml  
 训练集以XML文件提供，用于训练模型。XML文件中内容格式如下：  
-![训练集](http://github.com/WenRichard/DIAC2019-Adversarial-Attack-Share/raw/master/picture/数据格式.png)  
+![训练集]( https://github.com/WenRichard/DIAC2019-Adversarial-Attack-Share/raw/master/picture/数据格式.png)  
   
 每一个Questions标签中为一组数据，其中EquivalenceQuestions标签内的问句之间互为等价关系，NotEquivalenceQuestions标签内的问句与EquivalenceQuestions为不等价关系。EquivalenceQuestions之间的问句互相组合可以生成正样本（label为1），EquivalenceQuestions和NotEquivalenceQuestions之间的问句互相组合可以生成负样本（label为0），具体需要生成多少正样本多少负样本由参赛选手自行决定。  
 
-**dev.set.csv**  
+### dev.set.csv 
 验证集数据格式如下：  
-![验证集](http://github.com/WenRichard/DIAC2019-Adversarial-Attack-Share/raw/master/picture/验证集数据格式.png)  
+![验证集]( https://github.com/WenRichard/DIAC2019-Adversarial-Attack-Share/raw/master/picture/验证集数据格式.png)  
 
 ## 3. 数据链接
 [DIAC2019](https://pan.baidu.com/share/init?surl=KY_b7lfpIABb54Ov33A2OQ) ,  密码：ayvx
