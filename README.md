@@ -67,21 +67,27 @@ Macro F1 = (F1_正样本 + F1_负样本) / 2
   
 --------------------------------------------------------------
 # 资料区
-- **文本对抗样本生成比赛官方推荐论文：**  
+- **文本对抗样本生成-官方推荐论文：**  
 [1. A Survey: Towards a Robust Deep Neural Network in Text Domain](https://arxiv.org/pdf/1902.07285.pdf)  
 [2. Analysis Methods in Neural Language Processing: A Survey](https://www.mitpressjournals.org/doi/full/10.1162/tacl_a_00254)
   
-- **文本对抗样本生成比赛官方推荐论文群友推荐论文：**  
+- **文本对抗样本生成-群友推荐论文：**  
 [1. FreeLB: Enhanced Adversarial Training for Language Understanding](https://arxiv.org/abs/1909.11764)  
 [2019/12/5 下午一点FreeLB的作者朱晨有个直播分享](https://mp.weixin.qq.com/s/Sh4ZELkQoU4g1dMP0aoBUg)  
 
 - **可借鉴博客：**  
-[1.NLP中的对抗训练 + PyTorch实现](http://fyubang.com/2019/10/15/adversarial-train/)  
-[2.图解2018年领先的两大NLP模型：BERT和ELMo](https://new.qq.com/omn/20181214/20181214A0M9D6.html)  
+[1. NLP中的对抗训练 + PyTorch实现](http://fyubang.com/2019/10/15/adversarial-train/)  
+[2. 图解2018年领先的两大NLP模型：BERT和ELMo](https://new.qq.com/omn/20181214/20181214A0M9D6.html)  
+[3. 非平衡数据集 focal loss 多类分类](https://medium.com/swlh/multi-class-classification-with-focal-loss-for-imbalanced-datasets-c478700e65f5)
 
 - **其他比赛可借鉴代码：**  
 [1. 郭大-CCF-BDCI-Sentiment-Analysis-Baseline](https://github.com/guoday/CCF-BDCI-Sentiment-Analysis-Baseline)  
 [2. ZEN: A BERT-based Chinese Text Encoder Enhanced by N-gram Representations](https://github.com/sinovation/ZEN)  
+
+- **非比赛可借鉴代码：**  
+[1. focal-loss-keras](https://github.com/mkocabas/focal-loss-keras)  
+[2. focal-loss-pytorch](https://github.com/clcarwin/focal_loss_pytorch)  
+[3. focal-loss-tensorflow](https://github.com/ailias/Focal-Loss-implement-on-Tensorflow)  
   
 --------------------------------------------------------------
 # Trick区  
@@ -89,7 +95,7 @@ Macro F1 = (F1_正样本 + F1_负样本) / 2
 2. ZEN模型，score: 89.04  
 3. test 数据输入 neo4j 就会发现神奇的图特征 leak  
 4. 一种很差的leak，dev_set中，a-b b-c ，像这种左右（即b）都只出现一次的，a,b,c之间都是等价的，那其他和a、b、c在一起的都不是等价的  
-5. 对付这种不平衡样本，用凯明大神的focal loss, focal loss直接把正样本召回率拉起来，上92+  
+5. 对付这种不平衡样本，用凯明大神的focal loss, focal loss直接把正样本召回率拉起来，6fold+focal loss，score为92+；单fold，score只能到91  
 6. 去掉dropout也有提升  
   
 --------------------------------------------------------------
