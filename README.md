@@ -78,16 +78,17 @@ Macro F1 = (F1_正样本 + F1_负样本) / 2
 - **可借鉴博客：**  
 [1. NLP中的对抗训练 + PyTorch实现](http://fyubang.com/2019/10/15/adversarial-train/)  
 [2. 图解2018年领先的两大NLP模型：BERT和ELMo](https://new.qq.com/omn/20181214/20181214A0M9D6.html)  
-[3. 非平衡数据集 focal loss 多类分类](https://medium.com/swlh/multi-class-classification-with-focal-loss-for-imbalanced-datasets-c478700e65f5)
+[3. 非平衡数据集 focal loss 多类分类](https://medium.com/swlh/multi-class-classification-with-focal-loss-for-imbalanced-datasets-c478700e65f5)  
+[4. 华为诺亚方舟开源哪吒、TinyBERT模型，可直接下载使用](https://mp.weixin.qq.com/s/M2ZNjB0tbnB6uYAh97YyIQ)
 
 - **其他比赛可借鉴代码：**  
-[1. 郭大-CCF-BDCI-Sentiment-Analysis-Baseline](https://github.com/guoday/CCF-BDCI-Sentiment-Analysis-Baseline)  
-[2. ZEN: A BERT-based Chinese Text Encoder Enhanced by N-gram Representations](https://github.com/sinovation/ZEN)  
+[1. 郭大-CCF-BDCI-Sentiment-Analysis-Baseline](https://github.com/guoday/CCF-BDCI-Sentiment-Analysis-Baseline)   
 
 - **非比赛可借鉴代码：**  
 [1. focal-loss-keras](https://github.com/mkocabas/focal-loss-keras)  
 [2. focal-loss-pytorch](https://github.com/clcarwin/focal_loss_pytorch)  
 [3. focal-loss-tensorflow](https://github.com/ailias/Focal-Loss-implement-on-Tensorflow)  
+[4. ZEN: A BERT-based Chinese Text Encoder Enhanced by N-gram Representations](https://github.com/sinovation/ZEN) 
   
 --------------------------------------------------------------
 # Trick区  
@@ -97,9 +98,11 @@ Macro F1 = (F1_正样本 + F1_负样本) / 2
 4. 一种很差的leak，dev_set中，a-b b-c ，像这种左右（即b）都只出现一次的，a,b,c之间都是等价的，那其他和a、b、c在一起的都不是等价的  
 5. 对付这种不平衡样本，用凯明大神的focal loss, focal loss直接把正样本召回率拉起来，6fold+focal loss，score为92+；单fold，score只能到91  
 6. 去掉dropout也有提升  
+7. focal loss的gamma和alpha取多少合适? (gamma2,alpha 1)效果较好，gamma1和4都不好，别的没试过, **alpha设为1保留疑问**    
+8. 蒸馏学习，单模，score：91
   
 --------------------------------------------------------------
-# 完整思路区
+# 完整思路区（赛前）
 **思路1：** 对应trick 1，2  
 模型：用chinese-wwm-ext-base  
 郭大代码：https://github.com/guoday/CCF-BDCI-Sentiment-Analysis-Baseline  
@@ -112,6 +115,9 @@ zen模型，中文n-gram:https://github.com/sinovation/ZEN ，中文n-gram
 **思路3：** score： 91  
 [图解2018年领先的两大NLP模型：BERT和ELMo](https://new.qq.com/omn/20181214/20181214A0M9D6.html)这篇文章采用多层cls分类，验证过的单折91,这代码很像bert出来前一个很流行的框架compare-aggregate  
   
+ **思路4：** score： 90.8  
+[纯BERT+large模型 ](https://github.com/xmxoxo/SameQuestion) 有数据增强，例如pingyin，同义词替换，随机插入等部分。5-Fold 90.8
+
 --------------------------------------------------------------------
 # 疑惑区
 1. 比赛数据中的leak到底是啥？期待比赛结束后大佬们的解释  
