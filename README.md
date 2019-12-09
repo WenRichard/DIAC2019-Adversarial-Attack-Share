@@ -46,7 +46,7 @@
 训练集用于模型的学习，比赛期间选手可以提交验证集的预测结果，但最终成绩由测试集的预测结果决定，由于 **测试集中会有大量adversarial example** ，因此最终在测试集上的成绩可能会与验证集上不同。（测试集将于比赛结束前24小时发布，具体可参考时间轴页面。）  
   
  **训练数据集：** [DIAC2019](https://pan.baidu.com/share/init?surl=KY_b7lfpIABb54Ov33A2OQ) ,       提取码：ayvx  
- **测试集** [抽样样例](https://pan.baidu.com/s/1WrGhfl6MaicUcuLMGyphcw)，  提取码：k4im  
+ **测试集：** [抽样样例](https://pan.baidu.com/s/1WrGhfl6MaicUcuLMGyphcw),  提取码：k4im  
  
    
 ## 2. 数据格式
