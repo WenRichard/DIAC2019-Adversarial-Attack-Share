@@ -80,7 +80,8 @@ Macro F1 = (F1_正样本 + F1_负样本) / 2
 [1. NLP中的对抗训练 + PyTorch实现](http://fyubang.com/2019/10/15/adversarial-train/)  
 [2. 图解2018年领先的两大NLP模型：BERT和ELMo](https://new.qq.com/omn/20181214/20181214A0M9D6.html)  
 [3. 非平衡数据集 focal loss 多类分类](https://medium.com/swlh/multi-class-classification-with-focal-loss-for-imbalanced-datasets-c478700e65f5)  
-[4. 华为诺亚方舟开源哪吒、TinyBERT模型，可直接下载使用](https://mp.weixin.qq.com/s/M2ZNjB0tbnB6uYAh97YyIQ)
+[4. 华为诺亚方舟开源哪吒、TinyBERT模型，可直接下载使用](https://mp.weixin.qq.com/s/M2ZNjB0tbnB6uYAh97YyIQ)  
+[5. 深度度量学习中的损失函数](https://mp.weixin.qq.com/s/1Tqu8aLn4Jy6ED0Rk3iPHQ)  
 
 - **其他比赛可借鉴代码：**  
 [1. 郭大-CCF-BDCI-Sentiment-Analysis-Baseline](https://github.com/guoday/CCF-BDCI-Sentiment-Analysis-Baseline)   
@@ -90,21 +91,29 @@ Macro F1 = (F1_正样本 + F1_负样本) / 2
 [2. focal-loss-pytorch](https://github.com/clcarwin/focal_loss_pytorch)  
 [3. focal-loss-tensorflow](https://github.com/ailias/Focal-Loss-implement-on-Tensorflow)  
 [4. ZEN: A BERT-based Chinese Text Encoder Enhanced by N-gram Representations](https://github.com/sinovation/ZEN) 
+[5. pycorrector纠错](https://github.com/shibing624/pycorrector)  
+[6. siamese-triplet](https://github.com/adambielski/siamese-triplet)  
   
 --------------------------------------------------------------
 # Trick区  
+## A榜Trick汇总
 1. 对抗训练 + fgm + epsilon 1e-6  
 2. ZEN模型，score: 89.04  
 3. test 数据输入 neo4j 就会发现神奇的图特征 leak  
-4. 一种很差的leak，dev_set中，a-b b-c ，像这种左右（即b）都只出现一次的，a,b,c之间都是等价的，那其他和a、b、c在一起的都不是等价的  
+4. 一种很差的leak，dev_set中，a-b b-c ，像这种左右（即b）都只出现一次的，a,b,c之间都是等价的，那其他和a、b、c在一起的都不是等价的 
 5. 对付这种不平衡样本，用凯明大神的focal loss, focal loss直接把正样本召回率拉起来，6fold+focal loss，score为92+；单fold，score只能到91  
 6. 去掉dropout也有提升  
 7. focal loss的gamma和alpha取多少合适? (gamma2,alpha 1)效果较好，gamma1和4都不好，别的没试过, **alpha设为1保留疑问**    
 8. 蒸馏学习，单模，score：91  
-9. 关于**测试集抽样样例：** 用一个单模简单测了一下测试集抽样样例，20条正常样本（问题A + 问题B）准确率100%，20条对抗样本（问题A + 问题B'）错了7条，准确率65%，整体准确率82.5%。模型对对抗攻击样本保持标签不变的误判较多。10条保持label不变的对抗样本错4条，另10条label改变的样本错3条；另一个模型对抗样本错误分别是6条和3条。**建议关注如何增强模型对句子中词同义替换、错别字攻击后保持标签不变这种情况的判别鲁棒性。**  
+  
+## B榜Trick汇总  
+1. 关于**测试集抽样样例：** 用一个单模简单测了一下测试集抽样样例，20条正常样本（问题A + 问题B）准确率100%，20条对抗样本（问题A + 问题B'）错了7条，准确率65%，整体准确率82.5%。模型对对抗攻击样本保持标签不变的误判较多。10条保持label不变的对抗样本错4条，另10条label改变的样本错3条；另一个模型对抗样本错误分别是6条和3条。**建议关注如何增强模型对句子中词同义替换、错别字攻击后保持标签不变这种情况的判别鲁棒性。**  
+2. bert做特征初始化，把bert向量静态化（通过三元组共享权重，训练后的向量可以起个名字叫向量空间静态化，像word2vec,但效果比word2vec好）可以用聚类或分类
+
   
 --------------------------------------------------------------
 # 完整思路区（赛前）
+## A榜思路汇总
 **思路1：** 对应trick 1，2  
 模型：用chinese-wwm-ext-base  
 郭大代码：https://github.com/guoday/CCF-BDCI-Sentiment-Analysis-Baseline  
@@ -120,9 +129,14 @@ zen模型，中文n-gram:https://github.com/sinovation/ZEN ，中文n-gram
  **思路4：** score： 90.8  
 [纯BERT+large模型 ](https://github.com/xmxoxo/SameQuestion) 有数据增强，例如pingyin，同义词替换，随机插入等部分。5-Fold 90.8
 
+## B榜思路汇总
+**思路1：**  
+先进行**文本纠错**，然后使用三元组triplet loss进行训练，模型进行权重共享，计算余弦相似度并设定相应margin阈值输出结果。但是pycorrector的纠错效果有点惨，目前是有错再纠，只要拼音，句子长度相同的，可能会好点；另一个思路可以用纠错样本作为对抗样本，但是也是需要人为去判断，比较麻烦。
+
 --------------------------------------------------------------------
 # 疑惑区
 1. 比赛数据中的leak到底是啥？期待比赛结束后大佬们的解释  
+2. 测试集两个句子颠倒顺序放到模型里预测会有很大差别；颠倒顺序训练就没差别，不颠倒顺序训练差别就很大；但是颠倒顺序训练的效果没有不随机颠倒好？？    
   
 --------------------------------------------------------------------
 # 前排解决方案
