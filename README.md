@@ -90,7 +90,7 @@ Macro F1 = (F1_正样本 + F1_负样本) / 2
 [1. focal-loss-keras](https://github.com/mkocabas/focal-loss-keras)  
 [2. focal-loss-pytorch](https://github.com/clcarwin/focal_loss_pytorch)  
 [3. focal-loss-tensorflow](https://github.com/ailias/Focal-Loss-implement-on-Tensorflow)  
-[4. ZEN: A BERT-based Chinese Text Encoder Enhanced by N-gram Representations](https://github.com/sinovation/ZEN) 
+[4. ZEN: A BERT-based Chinese Text Encoder Enhanced by N-gram Representations](https://github.com/sinovation/ZEN)  
 [5. pycorrector纠错](https://github.com/shibing624/pycorrector)  
 [6. siamese-triplet](https://github.com/adambielski/siamese-triplet)  
   
