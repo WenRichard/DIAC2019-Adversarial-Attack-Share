@@ -74,7 +74,7 @@ Macro F1 = (F1_正样本 + F1_负样本) / 2
   
 - **文本对抗样本生成-群友推荐论文：**  
 [1. FreeLB: Enhanced Adversarial Training for Language Understanding](https://arxiv.org/abs/1909.11764)  
-[2019/12/5 下午一点FreeLB的作者朱晨有个直播分享](https://mp.weixin.qq.com/s/Sh4ZELkQoU4g1dMP0aoBUg)  
+[FreeLB的作者朱晨直播回放](https://www.bilibili.com/video/av78198097?from=search&seid=2477367698697383589)  
 
 - **可借鉴博客：**  
 [1. NLP中的对抗训练 + PyTorch实现](http://fyubang.com/2019/10/15/adversarial-train/)  
@@ -93,6 +93,7 @@ Macro F1 = (F1_正样本 + F1_负样本) / 2
 [4. ZEN: A BERT-based Chinese Text Encoder Enhanced by N-gram Representations](https://github.com/sinovation/ZEN)  
 [5. pycorrector纠错](https://github.com/shibing624/pycorrector)  
 [6. siamese-triplet](https://github.com/adambielski/siamese-triplet)  
+[7. 形近字大全](https://github.com/shibing624/pycorrector/blob/master/pycorrector/data/same_stroke.txt)  
   
 --------------------------------------------------------------
 # Trick区  
