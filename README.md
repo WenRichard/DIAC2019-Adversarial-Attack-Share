@@ -94,6 +94,7 @@ Macro F1 = (F1_正样本 + F1_负样本) / 2
 [5. pycorrector纠错](https://github.com/shibing624/pycorrector)  
 [6. siamese-triplet](https://github.com/adambielski/siamese-triplet)  
 [7. 形近字大全](https://github.com/shibing624/pycorrector/blob/master/pycorrector/data/same_stroke.txt)  
+[8. 同音易错词 53w个词](https://github.com/LiangsLi/ChineseHomophones)    
   
 --------------------------------------------------------------
 # Trick区  
@@ -111,7 +112,34 @@ Macro F1 = (F1_正样本 + F1_负样本) / 2
 1. 关于**测试集抽样样例：** 用一个单模简单测了一下测试集抽样样例，20条正常样本（问题A + 问题B）准确率100%，20条对抗样本（问题A + 问题B'）错了7条，准确率65%，整体准确率82.5%。模型对对抗攻击样本保持标签不变的误判较多。10条保持label不变的对抗样本错4条，另10条label改变的样本错3条；另一个模型对抗样本错误分别是6条和3条。**建议关注如何增强模型对句子中词同义替换、错别字攻击后保持标签不变这种情况的判别鲁棒性。**  
 2. bert做特征初始化，把bert向量静态化（通过三元组共享权重，训练后的向量可以起个名字叫向量空间静态化，像word2vec,但效果比word2vec好）可以用聚类或分类
 
+
+## 数据预处理Trick汇总  
+**1. Pycorrector**    
+直接使用pycorrector当做数据增强用，**扩展正例数据**，比正反翻译收益好很多。正反翻译引入噪声太多，pycorrector修正后数据参与训练扰动很小。**pycorrector的纠错能力并不好**，造成在推理的时候纠错，性能下降，纠错能力不好反过来可以作为数据增强使用，毕竟只改了里面几个字，不会直接影响句子的意思。  
   
+**2. Contributor[B榜，单模为0.76左右]**  
+方案一  
+original sentence pairs：[q11, q21, label]  
+augment sentence pairs：[q11, q21, q12, q22, label]  
+用A,B,C等替换句子对中相同的名词和代词，不替换动词，因为替换动词会破坏句子结构，得到q12,q22  
+【samples】：  
+q11：大气污染的为害有哪些？  
+q21：大气污染会产生什么危害？  
+q12：A的为害有哪些？  
+q22：A会产生什么危害？   
+  
+方案二  
+original sentence pairs：[q11, q21, label]  
+augment sentence pairs：[q11, q21, q12, q22, q3, label]  
+q12：q11的词与q21的词的差集；q22：q21的词与q11的词的差集；q3：q11的词与q21的词的交集  
+【samples】：  
+q11：消费者投诉举报电话是多少？  
+q21：消费者协会电话你知道是多少吗？  
+q12：投诉|举报电话？|  
+q22：协会|电话|  
+q3：消费者|  
+
+
 --------------------------------------------------------------
 # 完整思路区（赛前）
 ## A榜思路汇总
