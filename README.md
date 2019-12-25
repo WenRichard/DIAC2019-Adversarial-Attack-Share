@@ -118,6 +118,8 @@ Macro F1 = (F1_正样本 + F1_负样本) / 2
 直接使用pycorrector当做数据增强用，**扩展正例数据**，比正反翻译收益好很多。正反翻译引入噪声太多，pycorrector修正后数据参与训练扰动很小。**pycorrector的纠错能力并不好**，造成在推理的时候纠错，性能下降，纠错能力不好反过来可以作为数据增强使用，毕竟只改了里面几个字，不会直接影响句子的意思。  
   
 **2. Contributor[B榜，单模为0.76左右]**  
+[ 以下数据预处理code](https://github.com/activemodest/DIAC)  
+  
 方案一  
 original sentence pairs：[q11, q21, label]  
 augment sentence pairs：[q11, q21, q12, q22, label]  
