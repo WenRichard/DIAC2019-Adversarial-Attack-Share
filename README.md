@@ -174,7 +174,7 @@ zen模型，中文n-gram:https://github.com/sinovation/ZEN ，中文n-gram
 |Rank|version1|version2|Model|Source|
 |-|-|-|-|-|
 |5|python 3.7|pytorch 1.3.1|bert+fgm (roberta)|[DIAC2019-DQD-Based-on-Adversarial-Attack](https://github.com/julielin123/DIAC2019-DQD-Based-on-Adversarial-Attack)|
-|6|-|-|-|bert|[Adversarial Attack的问题等价性判别比赛第6分享](https://zhuanlan.zhihu.com/p/101039989)|
+|6|-|-|bert|[Adversarial Attack的问题等价性判别比赛第6分享](https://zhuanlan.zhihu.com/p/101039989)|
   
 ------------------------------------------------------------------
 **留言请在Issues或者email richardxie1205@gmail.com**
